@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { PersonService, Person } from '../../services/person.service';
 
 @Component({
   selector: 'app-person-form',
-  imports: [],
   templateUrl: './person-form.component.html',
-  styleUrl: './person-form.component.css'
 })
 export class PersonFormComponent {
+  person: Person = { name: '', surname: '', email: '', phone: '' };
 
+  constructor(private personService: PersonService) {}
+
+  submitForm() {
+    this.personService.addPerson(this.person).subscribe(() => {
+      alert('Person hinzugefügt!');
+    });
+  }
 }
